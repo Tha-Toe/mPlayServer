@@ -6,6 +6,7 @@ const app = express();
 const SpotifyWebApi = require("spotify-web-api-node");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const port = process.env.PORT || 3001;
 
 
 app.use(cors());
@@ -14,7 +15,7 @@ app.use(bodyParser.json());
 app.post("/refresh", (req,res) => {
     const refreshToken = req.body.refreshToken
     const spotifyApi = new SpotifyWebApi({
-        redirectUri: "http://localhost:3000",
+        redirectUri: "https://musicplay.vercel.app/",
         clientId: "2614e21fa9364cc690d8562664d222b3",
         clientSecret: "9168c24ab74e48cc89fe652d0967d896",
         refreshToken
@@ -37,7 +38,7 @@ app.post("/refresh", (req,res) => {
 app.post('/login',(req,res) => {
     const code = req.body.code
     const spotifyApi = new SpotifyWebApi({
-        redirectUri: "http://localhost:3000",
+        redirectUri: "https://musicplay.vercel.app/",
         clientId: "2614e21fa9364cc690d8562664d222b3",
         clientSecret: "9168c24ab74e48cc89fe652d0967d896"
     })
@@ -54,4 +55,4 @@ app.post('/login',(req,res) => {
     })
 })
 
-app.listen(3001)
+app.listen(port)
